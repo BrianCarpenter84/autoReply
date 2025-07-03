@@ -168,10 +168,12 @@ message:\n  {formatted_msg}"""
                                         </body>
                                     </html>
                                     """
+                    with open("TextDocs/from.txt") as file:
+                        sent_from = file.read()
 
                     msg = EmailMessage()
                     msg["Subject"] = "Auto Reply CLETrucker"
-                    msg["From"] = "info@cletrucker.com"
+                    msg["From"] = sent_from
                     msg["To"] = user_email
 
                     attachment_cid = make_msgid()
@@ -182,11 +184,8 @@ message:\n  {formatted_msg}"""
                         msg.add_related(
                             fp.read(), 'image', 'png', cid=attachment_cid)
 
-                    with open("TextDocs/smpt.txt") as file:
+                    with open("TextDocs/smtp.txt") as file:
                         host = file.read()
-
-                    with open("TextDocs/from.txt") as file:
-                        sent_from = file.read()
 
                     with smtplib.SMTP_SSL(host, 465) as server:
                         server.ehlo()
