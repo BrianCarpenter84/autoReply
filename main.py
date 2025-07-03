@@ -9,6 +9,8 @@ from datetime import datetime
 
 
 password = input("Enter password: ")
+print(" \n" * 80)
+
 monitor_inbox = True
 while monitor_inbox:
 
@@ -21,7 +23,10 @@ while monitor_inbox:
     with open("TextDocs/i.txt") as file:
         imap_server = file.read()
 
-    email_address ="info@cletrucker.com"
+    with open("TextDocs/e.txt") as file:
+        email_address = file.read()
+
+
     print(f"...Getting emails from account: {email_address}...\n")
     imap = imaplib.IMAP4_SSL(imap_server)
     imap.login(email_address, password)
